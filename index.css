@@ -1,0 +1,193 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div,
+h1, h2, h3, p, 
+a, ol, ul, li,
+fieldset, form, 
+label, legend, section{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+  border: 1px solid black;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+* {
+  font-family: 'PT Serif', serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+html, body, 
+#map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map-canvas {
+  height: 100%
+  width: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: 0;
+  border: 1px solid black;
+}
+
+
+.start-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  vertical-align: middle;
+  text-align: center;
+  background-color: rgb(173, 198, 216);
+  border: 1px solid black;
+}
+
+.user-info {
+  border: none;
+  display: block;
+}
+
+.user-info legend {
+  width: 100%;
+  padding-top: 2em;
+}
+
+.instruction {
+ padding: 10px;
+}
+
+.user-info label{
+  display: block;
+  font-size: 1.2em;
+  padding: 10px;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border: 1px solid black;
+  font-family: 'Roboto Condensed', sans-serif;
+  line-height: 1.5em;
+}
+
+.overlay{
+  height: 100%;
+  z-index: 10;
+  background-color: rgb(173, 198, 216);
+
+}
+
+.listing a {
+  text-align: center;
+}
+
+.info-window  {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+#search-area {
+  display: inline-block;
+  right: auto;
+  left: auto;
+  border: none;
+  text-align: center;
+  width: 100%;
+  border-bottom: 2px solid white;
+  padding:  0;
+  margin: 0;
+}
+
+.app-header {
+  text-align: center;
+}
+
+#search-box {
+  margin: 5px;
+  line-height: 1.3em;
+  font-size: 1.2em;
+  box-shadow: 0 0 3px #F1F1F2;
+  border: 1px solid black;
+  width: 100%;
+}
+
+.search-span {
+  display: block;
+  overflow: hidden;
+}
+
+.btn-search {
+  line-height: 1.2em;
+  box-shadow: 0 0 3px #F1F1F2;
+}
+
+.btn-search, .btn-open {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: 1px solid black;
+}
+
+.fa-search {
+  color: black;
+}
+
+.fa-bus, .fa-home {
+  color: blue;
+  font-size: 1.5em;
+}
+
+#bus-stop-list li {
+  list-style: none;
+  font-size: 1.1em;
+  border-bottom: 2px solid white;
+  padding: 5px;
+}
+
+#bus-stop-list .lists:hover, 
+#bus-stop-list .lists:active,
+#bus-stop-list .lists:focus {
+  background-color: azure;
+  cursor: pointer;
+}
+
+a:visited {
+  color: pink;
+}
+
+.hidden {
+  display: none;
+}

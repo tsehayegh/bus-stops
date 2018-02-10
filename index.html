@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <title>Nearest Bus Stop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="responsive-design.css">
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto|Roboto+Condensed" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+    <form role = "navigation" class = "start-page row">
+      <fieldset class = "user-info">
+        <legend>
+          <h1>Chapel Hill, North Carolina</h1>
+          <h2>Search the nearest bus stops</h2>
+        </legend>
+        <section class = "instruction"> 
+          <label>You will be able to see the nearest bus stops from a location you entered in a search box.</label>
+          <label>(App may not work on Internet Explorer browser!)</label>
+          <label>Are you ready to use the app? Click the <em>Open</em> button to start!</label>
+          <button class = "btn-open">Open</button>
+        </section>
+      </fieldset>
+    </form>
+
+      <div id = "map-canvas"></div>
+
+      <form role = "main" class = "frm-search-box overlay row col-3 hidden">
+
+        <fieldset class = "search-area" id = "search-area">
+          <section class = "app-header">
+            <h1>Chapel Hill, NC</h1>
+            <h2>Nearest Bus Stop</h2>
+          </section>
+            
+            <span class = "search-span"> <input type="text" id = "search-box" 
+                    placeholder = "Enter current location" 
+                    required aria-labelledby = 'search-area'></span>
+            <!--<button class = "btn-search"><i class="fa fa-search"></i>Search</button> -->
+            <button class = "btn-search">Search</button>
+     
+        </fieldset>
+
+        <section role = "contentinfo" id = "search-result">
+          <ul id = "bus-stop-list"></ul>
+        </section>
+      </form>
+
+      <script src= "https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src = "index.js"></script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYd-Lgf212rOrHPEfp7AF9D_3hFihIxxw&libraries=geometry&callback=initMap">
+      </script>
+  </body>
+</html>
