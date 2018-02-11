@@ -29,6 +29,9 @@ ol, ul {
   font-family: 'PT Serif', serif;
   box-sizing: border-box;
 }
+body * {
+  box-sizing: border-box;
+}
 
 h1 {
   font-size: 1.5em;
@@ -48,7 +51,7 @@ html, body,
 }
 
 #map-canvas {
-  height: 100%
+  height: 100%;
   width: 100%;
   position: absolute;
   top:0;
@@ -59,7 +62,7 @@ html, body,
 
 
 .start-page {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -73,15 +76,18 @@ html, body,
 .user-info {
   border: none;
   display: block;
+  padding-bottom: 10px;
+  margin: 0 auto;
 }
 
 .user-info legend {
   width: 100%;
-  padding-top: 2em;
+  padding-top: 10px;
 }
 
-.instruction {
+.instruction label{
  padding: 10px;
+ text-align: left;
 }
 
 .user-info label{

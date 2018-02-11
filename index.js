@@ -1,27 +1,20 @@
-let map;
-let infoWindow = null;
-let markers = [];
-let directionsDisplay;
-let currentLocation = {};
 
 //Initialize google maps
 function initMap() {
   let currentLoc = {lat: 35.913200, lng: -79.055847};
-  map = new google.maps.Map(document.getElementById('map-canvas'), {
+  state.map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 15,
     center: currentLoc,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
- infoWindow = new google.maps.InfoWindow({
+ state.infoWindow = new google.maps.InfoWindow({
   content: ''
 });
- directionsDisplay = new google.maps.DirectionsRenderer;
+ state.directionsDisplay = new google.maps.DirectionsRenderer;
 }
-
 
 //open search area
 function openApp(){
-  $('#map-canvas').css('width', '100%');
   $('.start-page').on('submit', function(event){
     event.preventDefault();
     showHideForm($('.start-page, .overlay'));
@@ -44,6 +37,7 @@ function searchNearestBus(){
     $('#bus-stop-list').empty();
     geocodeAddress();
   });
+
 }
 $(searchNearestBus);
 
@@ -53,12 +47,12 @@ function geocodeAddress(){
     let geocoder = new google.maps.Geocoder();
     geocoder.geocode({'address': currentAddress}, function(results, status) {
       if(status === 'OK') {
-        currentLocation = {'lat': results[0].geometry.location.lat(), 
+        state.currentLocation = {'lat': results[0].geometry.location.lat(), 
                           'lng':results[0].geometry.location.lng()};
-        addMarkerOnCurrentLoc(currentLocation);
-        getBusStopLocation(currentLocation);
-        map.setCenter(currentLocation);
-        map.setZoom(16);
+        addMarkerOnCurrentLoc(state.currentLocation);
+        getBusStopLocation(state.currentLocation);
+        state.map .setCenter(state.currentLocation);
+        state.map .setZoom(16);
 
       } else {
         console.log('Geocode was not successful for the following reason: ' + status);
@@ -94,8 +88,8 @@ function successResult(busLocation, currentCoord){
   let direction;
   let route = [];
   let routeFields = ['a', 'ccx', 'cl', 'cm', 'cpx', 'cw', 'd', 'dx', 
-              'f', 'fcx', 'g', 'hs', 'hu','hx', 'j', 'jfx', 'n',
-              'ns', 'nu', 'px', 'ru', 's', 't', 'u', 'v'];
+                      'f', 'fcx', 'g', 'hs', 'hu','hx', 'j', 'jfx', 'n',
+                      'ns', 'nu', 'px', 'ru', 's', 't', 'u', 'v'];
   busLocation.records.map(function(record, index){
     route = [];
     markerLocation = {'lat': record.fields.geo_point_2d[0], 
@@ -108,115 +102,114 @@ function successResult(busLocation, currentCoord){
     busStopStreet = record.fields.name.replace('at', '&');
     busStopAt = record.fields.at;
     direction = record.fields.dir;
+    let busStopCount = 0;
     addBusStopMarkers(currentCoord, markerLocation, 
-                    busStopStreet, busStopAt,
-                    direction, route);
+                      busStopStreet, busStopAt,
+                      direction, route);
   });
-
-
 }
 
-//Add clickable markers for each bus stop
+//Add clickable markers for each bus stop within 500 meters of radius
 function addBusStopMarkers(currentCoord, coordLocation, 
                           streetLocation, busStopAt,
                           direction,route){             
   let marker = new google.maps.Marker();  
   if (calcDistance(currentCoord.lat, currentCoord.lng, 
-                  coordLocation.lat, coordLocation.lng) <= 500){
-        marker = new google.maps.Marker({
-            position: coordLocation,
-            map: map,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-            //label: {fontFamily: 'Fontawesome', text: '\uf207', color: 'blue'}
-        });
-        markers.push(marker);
-        showBusStopsList(coordLocation, route, streetLocation, busStopAt, direction);
-        $('.lists').first().focus();
-        
-     let contentString = `<div class ="info-window">
-                            <h3><i class="fa fa-bus"></i> ${route}</h3>
-                            <p>${streetLocation}</p>
-                            <p>At: ${busStopAt}</p>
-                            <p>Heading: ${direction}</p>
-                          </div>`;
-      google.maps.event.addListener(marker, 'click', function(){
-        infoWindow.close();
-        infoWindow.setContent(contentString);
-        infoWindow.open(map,marker);
-        
+                  coordLocation.lat, coordLocation.lng) <= 1640.42){
+      marker = new google.maps.Marker({
+          position: coordLocation,
+          map: state.map,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
-    } 
+      state.markers.push(marker);
+      showBusStopsList(coordLocation, route, streetLocation, busStopAt, direction);
+      $('.lists').first().focus();
+      let contentString = `<div class ="info-window">
+                          <h3><i class="fa fa-bus"></i> ${route}</h3>
+                          <p>${streetLocation}</p>
+                          <p>At: ${busStopAt}</p>
+                          <p>Heading: ${busDirection[direction]}</p>
+                        </div>`;
+  addEventListner(marker, contentString);
+  } 
 }
+
+//marker event listner
+function addEventListner(marker, markerString){
+  google.maps.event.addListener(marker, 'click', function(){
+    state.infoWindow.close();
+    state.infoWindow.setContent(markerString);
+    state.infoWindow.open(state.map ,marker);
+    
+  }); 
+}
+
 
 //display bus stops within 1km radius
 function showBusStopsList(coordLocation, route, 
                           streetLocation, 
                           busStopAt,
                           direction){ 
-  if (direction ==='E'){
-    direction = 'East';
-  } else if (direction=== 'W') {
-    direction ='West';
-  } else if(direction=== 'S') {
-    direction = 'South';
-  } else if (direction=== 'N') {
-    direction = 'North';
-  }
-  let distance = parseInt(calcDistance(currentLocation.lat, currentLocation.lng, 
+  let distance = parseInt(calcDistance(state.currentLocation.lat, state.currentLocation.lng, 
                               coordLocation.lat, coordLocation.lng));
 
-  $('#bus-stop-list').append(`<li class = "lists" tabindex ='0' data-lat = ${coordLocation.lat}
+  $('#bus-stop-list').append(`<li class = "lists" tabindex ='0' 
+                                                  data-lat = ${coordLocation.lat}
                                                   data-lng = ${coordLocation.lng}
                                                   data-distance = ${distance}>
                                 <div class ="listing" data-lat = ${coordLocation.lat} 
                                                       data-lng = ${coordLocation.lng}
                                                       data-distance = ${distance}>
                                   <p>
-                                  <a href = "#">
-                                    <i class="fa fa-bus"></i> ${route} 
-                                  </a>
-                                  , ${streetLocation}
-                                  @ ${busStopAt}, Heading ${direction}, ${distance} meters</p>
+                                    <a href = "#">
+                                      <i class="fa fa-bus"></i> ${route} 
+                                    </a>
+                                    , ${streetLocation}
+                                    @ ${busStopAt}, Heading ${busDirection[direction]}, ${distance} feet
+                                  </p>
                                 </div>
                             </li>`);  
 sortList();                 
 }
+//sort the bus stop list
+function sortList() {
+  $('#bus-stop-list').html(
+    $('#bus-stop-list').children('li').sort(function (a,b){
+      return $(a).data('distance') - $(b).data('distance');
+    })
+  );
+};
 
-//Add clickable markers for each bus stop
+//Add clickable markers on current location
 function addMarkerOnCurrentLoc(currentCoord){
   let marker = new google.maps.Marker();  
   marker = new google.maps.Marker({
       position: currentCoord,
-      map: map,
+      map: state.map ,
       label: {
       fontFamily: 'Fontawesome', text: '\uf015', color: 'green'}
   });
     
-  markers.push(marker);
+  state.markers.push(marker);
   let contentString = `<div class ="info-window">
                         <h3><i class="fa fa-home"></i></h3>
                         <p>${$('#search-box').val()}</p>
                       </div>`;
-     
-  google.maps.event.addListener(marker, 'click', function(){
-    infoWindow.close();
-    infoWindow.setContent(contentString);
-    infoWindow.open(map,marker);
-  });
+  addEventListner(marker, contentString);
 }
 
 //calculate straight line distance from current location to bus stops
 function calcDistance (fromLat, fromLng, toLat, toLng) {
       return google.maps.geometry.spherical.computeDistanceBetween(
-        new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng));
+        new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng))*(3.28084);
    }
 
 // Deletes all markers in the array by removing references to them.
 function deleteMarkers() {
-  for (let i = 0; i < markers.length; i++) {
-    markers[i].setMap(null);
+  for (let i = 0; i < state.markers.length; i++) {
+    state.markers[i].setMap(null);
   }
-  markers = [];
+  state.markers = [];
 }
 
 //zooms in to the selected bus stop location after click event
@@ -224,8 +217,8 @@ function selectBusStopFromList(){
   $('#bus-stop-list').on('click', '.listing', function(event){
     event.preventDefault();
     let dest = {'lat': $(this).data('lat'), 'lng': $(this).data('lng')};
-    calcAndDisplayRoute(dest);
     zoomIn($(this));
+    calcAndDisplayRoute(dest);
   });
 }
 $(selectBusStopFromList);
@@ -235,8 +228,8 @@ function selectBusStopFromListKey(){
   $('#bus-stop-list').on('keydown', '.lists',(function(e){
     if (e.which === 13) {
     let dest = {'lat': $(this).data('lat'), 'lng': $(this).data('lng')};
-    calcAndDisplayRoute(dest);
     zoomIn($(this));
+    calcAndDisplayRoute(dest);
   };
   }));
 }
@@ -248,14 +241,13 @@ function zoomIn(currentElem, ind){
 
   selectedBusStopLoc = {'lat': $(currentElem).data('lat'), 
                         'lng': $(currentElem).data('lng')};
-  map.setCenter(selectedBusStopLoc);
-  map.setZoom(15);
-
-  for (let i = 0; i < markers.length; i++){
-    if(markers[i].getPosition().lat() === $(currentElem).data('lat')) {
-      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+  state.map .setCenter(selectedBusStopLoc);
+  state.map .setZoom(15);
+  for (let i = 0; i < state.markers.length; i++){
+    if(state.markers[i].getPosition().lat() === $(currentElem).data('lat')) {
+      state.markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
     } else {
-      markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+      state.markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
     }
   }
 }
@@ -267,25 +259,30 @@ function errorFunction(xhr, status, errorThrown){
 }
 
 function showErrorMessage(error){
-    $('#bus-stop-list').html(`Error occurred: ${error}`)
+    if (responseStatus[error]) {
+      $('#bus-stop-list').html(`${error}: ${responseStatus[error]}`)
+    } else {
+
+      $('#bus-stop-list').html(`Error occurred: ${error}`)
+    }
 }
 
 //Create walking route
 function calcAndDisplayRoute(dest) {
   let directionsService = new google.maps.DirectionsService;
   clearRoute();
-  directionsDisplay.setMap(map);
+  state.directionsDisplay.setMap(state.map);
   directionsService.route({
-      origin: currentLocation,  
+      origin: state.currentLocation,  
       destination: dest,  
       travelMode: 'WALKING'
     }, function(response, status) {
       if (status == 'OK') {
           let trip ={'dist': response.routes[0].legs[0].distance.text,
             'dur' : response.routes[0].legs[0].duration.text}
-          directionsDisplay.setDirections(response);
+          state.directionsDisplay.setDirections(response);
       } else {
-        window.alert('Directions request failed due to ' + status);
+        showErrorMessage(status);
       }
     });
   sortList();
@@ -293,16 +290,8 @@ function calcAndDisplayRoute(dest) {
 
 //clear route information
 function clearRoute(){
-    if (directionsDisplay != null) {
-      directionsDisplay.setMap(null);
+    if (state.directionsDisplay != null) {
+      state.directionsDisplay.setMap(null);
   }
 }
 
-//sort the bus stop list
-function sortList() {
-  $('#bus-stop-list').html(
-    $('#bus-stop-list').children('li').sort(function (a,b){
-      return $(a).data('distance') - $(b).data('distance');
-    })
-  );
-};
