@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link rel="stylesheet" type="text/css" href="responsive-design.css">
+    <link rel="stylesheet" type="text/css" href="responsive.css">
 
     <link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto|Roboto+Condensed" rel="stylesheet">
 
@@ -13,14 +13,14 @@
 
   </head>
   <body>
-    <form role = "navigation" class = "start-page row">
+    <form role = "navigation" action = '' method = "submit" class = "start-page">
       <fieldset class = "user-info">
         <legend>
           <h1>Chapel Hill, North Carolina</h1>
           <h2>Search the nearest bus stops</h2>
         </legend>
         <section class = "instruction"> 
-          <label>You will be able to see the nearest bus stops from a location you entered in a search box.</label>
+          <label>In this App you will be able to see the nearest bus stops from a location you entered in a search box in Chapel Hill, North Carolina. After you entered a complete address of your current location the App will list all bus stops which are within 1,640 feet (or 500 meters) of radius. You can click (or hit enter key) on any of the list of bus stops and a walking direction will be displayed on Google map. The actual walking distance and straight line distance may not be the same. The list is sorted in ascedning order by the a straight line distance from the current location you entered.</label>
           <label>(App may not work on Internet Explorer browser!)</label>
           <label>Are you ready to use the app? Click the <em>Open</em> button to start!</label>
           <button class = "btn-open">Open</button>
@@ -30,7 +30,7 @@
 
       <div id = "map-canvas"></div>
 
-      <form role = "main" class = "frm-search-box overlay row col-3 hidden">
+      <form role = "main" class = "frm-search-box overlay row col-3 hidden" action = '' method = "submit">
 
         <fieldset class = "search-area" id = "search-area">
           <section class = "app-header">
@@ -52,6 +52,7 @@
       </form>
 
       <script src= "https://code.jquery.com/jquery-3.3.1.js"></script>
+      <script src = "state.js"></script>
       <script src = "index.js"></script>
       <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYd-Lgf212rOrHPEfp7AF9D_3hFihIxxw&libraries=geometry&callback=initMap">
