@@ -1,3 +1,5 @@
+
+
 let state = (function() {
    return {
       map: null,
@@ -27,3 +29,4 @@ let responseStatus = (function() {
       'busStopCount': 0
    };
 }());
+

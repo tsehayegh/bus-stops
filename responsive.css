@@ -28,7 +28,6 @@
 	width: 100%;
 }
 
-
 @media only screen and (min-width: 320px) {
 	.col-3 {
 		width: 25%;
@@ -95,7 +94,7 @@ and (orientation: portrait){
 	}
 }
 
-/*mobiles in landscape mode*/
+/*mobiles (larger) in landscape mode*/
 @media only screen
 and (min-device-width: 481px)
 and (max-device-width: 767px)
@@ -121,7 +120,7 @@ and (orientation: landscape){
 	}
 }
 
-/*mobiles in portrait mode*/
+/*mobiles (larger) in portrait mode*/
 @media only screen
 and (min-device-width: 481px)
 and (max-device-width: 767px)
@@ -206,7 +205,6 @@ and (orientation: landscape){
   	left: 50%;
   transform: translate(-50%, -50%);
   }
-
 }
 
 

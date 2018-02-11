@@ -134,7 +134,7 @@ function addBusStopMarkers(currentCoord, coordLocation,
   } 
 }
 
-//marker event listner
+//add marker event listner
 function addEventListner(marker, markerString){
   google.maps.event.addListener(marker, 'click', function(){
     state.infoWindow.close();
@@ -144,15 +144,15 @@ function addEventListner(marker, markerString){
   }); 
 }
 
-
 //display bus stops within 1km radius
 function showBusStopsList(coordLocation, route, 
                           streetLocation, 
                           busStopAt,
                           direction){ 
-  let distance = parseInt(calcDistance(state.currentLocation.lat, state.currentLocation.lng, 
-                              coordLocation.lat, coordLocation.lng));
-
+  let distance = parseInt(calcDistance(state.currentLocation.lat, 
+                                      state.currentLocation.lng, 
+                                      coordLocation.lat, 
+                                      coordLocation.lng));
   $('#bus-stop-list').append(`<li class = "lists" tabindex ='0' 
                                                   data-lat = ${coordLocation.lat}
                                                   data-lng = ${coordLocation.lng}
@@ -171,6 +171,7 @@ function showBusStopsList(coordLocation, route,
                             </li>`);  
 sortList();                 
 }
+
 //sort the bus stop list
 function sortList() {
   $('#bus-stop-list').html(
@@ -204,13 +205,6 @@ function calcDistance (fromLat, fromLng, toLat, toLng) {
         new google.maps.LatLng(fromLat, fromLng), new google.maps.LatLng(toLat, toLng))*(3.28084);
    }
 
-// Deletes all markers in the array by removing references to them.
-function deleteMarkers() {
-  for (let i = 0; i < state.markers.length; i++) {
-    state.markers[i].setMap(null);
-  }
-  state.markers = [];
-}
 
 //zooms in to the selected bus stop location after click event
 function selectBusStopFromList(){
@@ -235,7 +229,6 @@ function selectBusStopFromListKey(){
 }
 $(selectBusStopFromListKey);
 
-
 //Zoomin to the selected bus stop
 function zoomIn(currentElem, ind){
 
@@ -250,21 +243,6 @@ function zoomIn(currentElem, ind){
       state.markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
     }
   }
-}
-
-//Callback function to display error messange (if any)
-function errorFunction(xhr, status, errorThrown){
-  let errorStatus =  errorThrown + ',' + status;
-  showErrorMessage(errorStatus);
-}
-
-function showErrorMessage(error){
-    if (responseStatus[error]) {
-      $('#bus-stop-list').html(`${error}: ${responseStatus[error]}`)
-    } else {
-
-      $('#bus-stop-list').html(`Error occurred: ${error}`)
-    }
 }
 
 //Create walking route
@@ -288,10 +266,34 @@ function calcAndDisplayRoute(dest) {
   sortList();
 }
 
+//Callback function to display error messange (if any)
+function errorFunction(xhr, status, errorThrown){
+  let errorStatus =  errorThrown + ',' + status;
+  showErrorMessage(errorStatus);
+}
+
+function showErrorMessage(error){
+    if (responseStatus[error]) {
+      $('#bus-stop-list').html(`${error}: ${responseStatus[error]}`)
+    } else {
+
+      $('#bus-stop-list').html(`Error occurred: ${error}`)
+    }
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  for (let i = 0; i < state.markers.length; i++) {
+    state.markers[i].setMap(null);
+  }
+  state.markers = [];
+}
+
 //clear route information
 function clearRoute(){
     if (state.directionsDisplay != null) {
       state.directionsDisplay.setMap(null);
   }
 }
+
 
