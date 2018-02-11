@@ -1,10 +1,10 @@
 Nearest Bus Stop
-Chapel Hill, North Carolina
+in Chapel Hill, North Carolina
 
-<img width="1680" alt="start page large screen" src="https://user-images.githubusercontent.com/34139675/36075239-05d813d8-0f1a-11e8-8b0d-c2438051ad24.png">
-<img width="1680" alt="start page small screen" src="https://user-images.githubusercontent.com/34139675/36075240-161843e4-0f1a-11e8-9d60-8995b347f7fa.png">
-<img width="1680" alt="display page small screen" src="https://user-images.githubusercontent.com/34139675/36075242-1ecef14a-0f1a-11e8-8596-49376bf156c8.png">
-<img width="1680" alt="display page large screen" src="https://user-images.githubusercontent.com/34139675/36075245-23fc9258-0f1a-11e8-8750-c2a571454c62.png">
+<img width="1665" alt="start page large screen" src="https://user-images.githubusercontent.com/34139675/36075446-184b5bee-0f1d-11e8-82a3-ff0e925cb4c2.png">
+<img width="573" alt="start page small screen" src="https://user-images.githubusercontent.com/34139675/36075452-225b6ce6-0f1d-11e8-85b2-fef645c4375b.png">
+<img width="1675" alt="display page large screen" src="https://user-images.githubusercontent.com/34139675/36075455-29bf5a7e-0f1d-11e8-8ef4-2a4490f8caa5.png">
+<img width="322" alt="display page small screen" src="https://user-images.githubusercontent.com/34139675/36075460-3794cc4c-0f1d-11e8-9ee9-d86743a4c7ab.png">
 
 People always travel to different cities whether for a business, vacation, or other issues. Most of them depend on public transportation to visit places during their stay in the city. Some may take taxis, trains, or buses. This web application is designed to help anyone looking to find the closest bus stop(s) from their current locations in Chapel Hill, North Carolina. The user will enter a full address of the current location and the app will show all bus stops within half a kilometer(assuming a half kilomter is a reasonal walking distance) from the current location. For this capstone project, Chapel Hill, a city in North Carolina, which has open data and API for its transit system is used and I was able to apply all of the technical requirements for the the capstone project.But the app can be scaled for any city.
 
