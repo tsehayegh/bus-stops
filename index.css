@@ -76,7 +76,10 @@ html, body,
 .user-info {
   border: none;
   display: block;
+  position: relative;
   padding-bottom: 10px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 
@@ -86,15 +89,12 @@ html, body,
 }
 
 .instruction label{
- padding: 10px;
- text-align: left;
-}
-
-.user-info label{
+  padding: 10px;
+  text-align: left;
   display: block;
   font-size: 1.2em;
-  padding: 10px;
 }
+
 
 .overlay{
   position: absolute;
