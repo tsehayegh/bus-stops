@@ -306,7 +306,7 @@ function $buo_f(){
 };
 try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
 catch(e){window.attachEvent("onload", $buo_f)}
-
 }
 
+$(browserUpdateNotify);
 
