@@ -1,6 +1,8 @@
 Nearest Bus Stop
 in Chapel Hill, North Carolina
 
+App available on [Github Pages](https://tsehayegh.github.io/bus-stops/)
+
 <img width="1665" alt="start page large screen" src="https://user-images.githubusercontent.com/34139675/36075446-184b5bee-0f1d-11e8-82a3-ff0e925cb4c2.png">
 <img width="573" alt="start page small screen" src="https://user-images.githubusercontent.com/34139675/36075452-225b6ce6-0f1d-11e8-85b2-fef645c4375b.png">
 <img width="1675" alt="display page large screen" src="https://user-images.githubusercontent.com/34139675/36075455-29bf5a7e-0f1d-11e8-8ef4-2a4490f8caa5.png">
