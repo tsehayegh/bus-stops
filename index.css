@@ -30,15 +30,10 @@ ol, ul {
   box-sizing: border-box;
 }
 
-h1 {
-  font-size: 1.5em;
+h1, h2 {
   font-weight: bold;
 }
 
-h2 {
-  font-size: 1.4em;
-  font-weight: bold;
-}
 
 html, body, 
 #map-canvas {
@@ -68,6 +63,8 @@ html, body,
   text-align: center;
   background-color: rgb(173, 198, 216);
   border: 1px solid black;
+  font-size: 18px;
+  line-height: 1.2em;
 }
 
 .user-info {
@@ -81,6 +78,7 @@ html, body,
 }
 
 .user-info legend {
+  font-size: 20px;
   width: 100%;
   padding-top: 10px;
 }
@@ -89,7 +87,7 @@ html, body,
   padding: 10px;
   text-align: left;
   display: block;
-  font-size: 1.2em;
+  font-size: 18px;
 }
 
 .overlay{
@@ -101,9 +99,10 @@ html, body,
   overflow-x: hidden;
   border: 1px solid black;
   font-family: 'Roboto Condensed', sans-serif;
-  line-height: 1.5em;
+  font-size: 20px;
   z-index: 10;
   background-color: rgb(173, 198, 216);
+
 }
 
 .listing a {
@@ -123,19 +122,24 @@ html, body,
   text-align: center;
   width: 100%;
   border-bottom: 2px solid white;
-  padding:  0;
   margin: 0;
+  padding: 10px;
 }
 
 .app-header {
   text-align: center;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 10px 12px;
+  width: 100%;
 }
 
 #search-box {
   margin: 5px;
   padding: 5px;
-  line-height: 1.3em;
-  font-size: 1.2em;
+  padding-right: 5px;
+  line-height: 1.5em;
+  font-size: 20px;
   box-shadow: 0 0 3px #F1F1F2;
   border: 1px solid black;
   width: 100%;
@@ -147,15 +151,15 @@ html, body,
 }
 
 .btn-search {
-  line-height: 1.2em;
+  line-height: 1.5em;
   box-shadow: 0 0 3px #F1F1F2;
 }
 
 .btn-search, .btn-open {
   text-align: center;
-  font-size: 1.5em;
   font-weight: bold;
   border: 1px solid black;
+  font-size: 1.3em;
 }
 
 .fa-search {
@@ -164,12 +168,10 @@ html, body,
 
 .fa-bus, .fa-home {
   color: blue;
-  font-size: 1.5em;
 }
 
 #bus-stop-list li {
   list-style: none;
-  font-size: 1.1em;
   border-bottom: 2px solid white;
   padding: 5px;
 }

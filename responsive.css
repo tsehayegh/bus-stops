@@ -65,6 +65,10 @@ and (orientation: landscape){
 		width: 40%;
 		font-size: .9em;
 	}
+
+	#search-box {
+		font-size: 0.9em;
+	}
 }
 
 /*mobiles in portrait mode*/
@@ -92,6 +96,9 @@ and (orientation: portrait){
 		width: 100%;
 		font-size: .9em;
 	}
+	#map-canvas {
+		width: 100%;
+	}
 }
 
 /*mobiles (larger) in landscape mode*/
@@ -117,6 +124,9 @@ and (orientation: landscape){
 	.overlay {
 		width: 40%;
 		font-size: .9em;
+	}
+	#map-canvas {
+		width: 60%;
 	}
 }
 
@@ -145,6 +155,10 @@ and (orientation: portrait){
 		width: 40%;
 		font-size: .9em;
 	}
+
+	#map-canvas {
+		width: 60%;
+	}
 }					
 
 /*tablets in landscape mode*/
@@ -171,6 +185,10 @@ and (orientation: landscape){
 		width: 40%;
 		font-size: .9em;
 	}
+
+	#map-canvas {
+		width: 60%;
+	}
 }
 /*tablets in portrait mode*/
 @media only screen
@@ -195,6 +213,10 @@ and (orientation: landscape){
 		width: 35%;
 		font-size: 1.2em;
 	}
+
+	#map-canvas {
+		width: 65%;
+	}
 }
 
 /* Desktops and laptops ----------- */
@@ -205,6 +227,15 @@ and (orientation: landscape){
   	left: 50%;
   transform: translate(-50%, -50%);
   }
+
+	#map-canvas {
+		width: 75%;
+	}
+
+	.overlay {
+		width: 30%;
+		font-size: 1.2em;
+	}
 }
 
 
